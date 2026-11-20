@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obrigado, Leo 💙</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #0f172a, #1e293b, #2e1065);
+    background-size: 400% 400%;
+    animation: bgShift 15s ease infinite;
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+  }
+
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Partículas coloridas de fundo */
+  .particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0.5;
+    filter: blur(0.5px);
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.3); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+  }
+
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  nav button {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #93c5fd;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+  }
+  nav button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+  nav button:hover, nav button.active {
+    background: rgba(59, 130, 246, 0.4);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.6), 0 4px 15px rgba(59, 130, 246, 0.3);
+    border-color: transparent;
+  }
+  nav button:hover::before, nav button.active::before { opacity: 1; }
+
+  .page {
+    display: none;
+    animation: fadeIn 0.6s ease;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(49, 32, 76, 0.85));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(139, 92, 246, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .page::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(96, 165, 250, 0.08), transparent, rgba(236, 72, 153, 0.08), transparent);
+    animation: rotateGlow 12s linear infinite;
+    z-index: -1;
+  }
+  @keyframes rotateGlow {
+    to { transform: rotate(360deg); }
+  }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6, #fbbf24, #60a5fa);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    animation: textShine 5s ease infinite;
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+  @keyframes textShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    color: #93c5fd;
+    margin: 1.8rem 0 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  p {
+    line-height: 1.8;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #fbbf24, #f472b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 1.1em;
+  }
+
+  .quote {
+    border-left: 3px solid #3b82f6;
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.08));
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    color: #bfdbfe;
+    animation: quoteGlow 3s ease-in-out infinite;
+  }
+  @keyframes quoteGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(59, 130, 246, 0); }
+    50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  }
+
+  .god-box {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.1));
+    background-size: 200% 200%;
+    animation: godGlow 6s ease infinite;
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    border-radius: 20px;
+    padding: 1.8rem 1.5rem;
+    margin: 1.8rem 0;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  @keyframes godGlow {
+    0%, 100% { background-position: 0% 50%; box-shadow: 0 0 40px rgba(251, 191, 36, 0.15); }
+    50% { background-position: 100% 50%; box-shadow: 0 0 60px rgba(251, 191, 36, 0.3); }
+  }
+  .god-box::before {
+    content: '✨';
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 1.2rem;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+  }
+  .god-box .cross {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.8rem;
+    animation: crossFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.8));
+  }
+  @keyframes crossFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .god-box p {
+    color: #fde68a;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.9;
+  }
+  .god-box .verse {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: #fbbf24;
+    font-style: normal;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+  }
+
+  .card {
+    background: linear-gradient(135deg, rgba(51, 65, 85, 0.6), rgba(76, 29, 149, 0.3));
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 16px;
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), transparent);
+    transition: left 0.6s;
+  }
+  .card:hover::after { left: 100%; }
+  .card:hover {
+    transform: translateX(6px) scale(1.02);
+    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.25), 0 0 20px rgba(139, 92, 246, 0.2);
+  }
+  .card .emoji {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+    transition: transform 0.4s;
+  }
+  .card:hover .emoji {
+    transform: scale(1.3) rotate(-10deg);
+  }
+  .card h3 { color: #e2e8f0; font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .card p { font-size: 0.95rem; margin: 0; }
+
+  .surprise-btn {
+    display: block;
+    margin: 2rem auto 0;
+    background: linear-gradient(135deg, #f59e0b, #f43f5e, #8b5cf6, #3b82f6, #f59e0b);
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite, btnPulse 2s ease-in-out infinite;
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(244, 63, 94, 0.5), 0 0 25px rgba(139, 92, 246, 0.4);
+    transition: transform 0.2s;
+    position: relative;
+  }
+  .surprise-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(244, 63, 94, 0.7), 0 0 40px rgba(139, 92, 246, 0.6);
+  }
+  .surprise-btn:active { transform: scale(0.97); }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 10px 30px rgba(244, 63, 94, 0.5), 0 0 25px rgba(139, 92, 246, 0.4); }
+    50% { box-shadow: 0 10px 40px rgba(244, 63, 94, 0.8), 0 0 45px rgba(139, 92, 246, 0.7); }
+  }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
+
+  .modal {
+    background: linear-gradient(135deg, #1e293b, #4c1d95, #1e293b);
+    background-size: 200% 200%;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), modalGlow 5s ease infinite;
+    border: 2px solid rgba(251, 191, 36, 0.6);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 0 80px rgba(251, 191, 36, 0.4), 0 0 40px rgba(139, 92, 246, 0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes modalGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .modal .big-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: emojiBounce 1.5s ease-in-out infinite;
+  }
+  @keyframes emojiBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(-8deg); }
+    75% { transform: translateY(-10px) rotate(8deg); }
+  }
+  .modal h2 { color: #fbbf24; justify-content: center; margin-top: 0; }
+  .modal p { color: #e2e8f0; }
+  .modal .signature {
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    background-size: 200% 200%;
+    animation: textShine 3s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  .close-modal {
+    margin-top: 1.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border: none;
+    color: #fff;
+    padding: 0.7rem 1.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .close-modal:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+  }
+
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    z-index: 99;
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.6rem; }
+    .page { padding: 1.8rem 1.2rem; }
+    nav button { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="particles" id="particles"></div>
+
+<div class="container">
+  <nav>
+    <button class="active" data-page="home">Início</button>
+    <button data-page="sobre">Sobre o Leo</button>
+  </nav>
+
+  <!-- PÁGINA INICIAL -->
+  <section class="page active" id="home">
+    <h1>Obrigado, Leo 💙</h1>
+    <p>
+      Leo, eu não podia deixar essa mensagem que você me mandou passar em branco.
+      Você não faz ideia do quanto ela significou pra mim.
+    </p>
+    <div class="quote">
+      "Seus pais têm muita sorte! Por terem um filho tão incrível como você."
+    </div>
+    <p>
+      Nesse pouco tempo trabalhando juntos, você me ensinou muito mais do que
+      trabalho — você me mostrou o que é ter alguém que acredita na gente de verdade.
+      Um cara que fala como pai, que se preocupa, que vibra junto.
+    </p>
+    <p>
+      Esse site é só uma forma simples de dizer: <span class="highlight">muito obrigado, de coração.</span>
+    </p>
+
+    <div class="god-box">
+      <span class="cross">✝️</span>
+      <p>
+        "Leo, que Deus te abençoe e te guarde. Que Ele ilumine cada passo seu,
+        te dê saúde, paz e sabedoria pra continuar sendo esse homem de coração bom.
+        Que você colha em dobro tudo o que planta na vida dos outros."
+      </p>
+      <span class="verse">— Números 6:24-26</span>
+    </div>
+
+    <button class="surprise-btn" onclick="showSurprise()">🎁 Surpresa</button>
+  </section>
+
+  <!-- SOBRE O LEO -->
+  <section class="page" id="sobre">
+    <h1>Sobre o Leo</h1>
+    <p>
+      O Leo é aquele tipo de pessoa que aparece na sua vida e faz toda a diferença.
+      Supervisor, mentor, amigo — mas acima de tudo, um cara que se importa.
+    </p>
+    <div class="card">
+      <span class="emoji">👨‍🏫</span>
+      <h3>Mentor de verdade</h3>
+      <p>Não é só passar tarefa e cobrar. É sentar, trocar ideia, explicar com paciência e acompanhar cada passo do crescimento.</p>
+    </div>
+    <div class="card">
+      <span class="emoji">💬</span>
+      <h3>Fala como pai</h3>
+      <p>Quando ele diz "me ouve, estou falando como falaria para um filho", dá pra sentir que não é só profissional. É cuidado real.</p>
+    </div>
+    <div class="card">
+      <span class="emoji">🎯</span>
+      <h3>Reconhece o esforço</h3>
+      <p>Ele percebeu o giro de 360 graus no meu trabalho e fez questão de dizer. Isso motiva qualquer um.</p>
+    </div>
+    <div class="card">
+      <span class="emoji">❤️</span>
+      <h3>Vibra com a vitória do outro</h3>
+      <p>Quando soube que os chefões foram atrás de mim, o coração dele explodiu de alegria. Isso é raro.</p>
+    </div>
+
+    <div class="god-box">
+      <span class="cross">🙏</span>
+      <p>
+        "Leo, que Deus te dê em dobro tudo o que você faz pelos outros.
+        Que a sua bondade seja semente de bênçãos na vida de quem tem a sorte
+        de trabalhar do seu lado."
+      </p>
+      <span class="verse">— Provérbios 11:25</span>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL SURPRESA -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <span class="big-emoji">🎉💙</span>
+    <h2>Surpresa!</h2>
+    <p>
+      Leo, essa é a surpresa: eu não queria só te mandar uma mensagem de volta.
+      Queria fazer algo que você pudesse guardar e reler sempre que precisar.
+    </p>
+    <p style="margin-top:1rem;">
+      Você me disse que tem sorte de acompanhar a minha mudança, mas a verdade
+      é que <strong>eu</strong> tenho sorte de ter você como supervisor, mentor e amigo.
+      Você fala como pai, se preocupa de verdade e vibra com a minha vitória —
+      isso não tem preço.
+    </p>
+    <p style="margin-top:1rem;">
+      Obrigado por acreditar em mim, Leo. O mundo precisa de mais gente como você.
+    </p>
+    <div class="god-box" style="margin:1.2rem 0 0;">
+      <span class="cross">✝️</span>
+      <p>
+        "Deus abençoe você e toda a sua família, Leo. Que nunca falte paz,
+        saúde e alegria na sua casa. Você é uma bênção na vida de muita gente."
+      </p>
+    </div>
+    <div class="signature">— Samuel 💙</div>
+    <button class="close-modal" onclick="hideSurprise()">Fechar</button>
+  </div>
+</div>
+
+<script>
+  // Navegação
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.page).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Estrelas
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 3 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starsContainer.appendChild(star);
+  }
+
+  // Partículas coloridas
+  const particlesContainer = document.getElementById('particles');
+  const particleColors = ['#60a5fa', '#a78bfa', '#f472b6', '#fbbf24', '#34d399', '#f87171', '#22d3ee'];
+  for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 14 + 4;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = particleColors[Math.floor(Math.random() * particleColors.length)];
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    p.style.boxShadow = `0 0 ${size}px currentColor`;
+    particlesContainer.appendChild(p);
+  }
+
+  // Surpresa
+  function showSurprise() {
+    document.getElementById('modal').classList.add('show');
+    launchConfetti();
+  }
+  function hideSurprise() {
+    document.getElementById('modal').classList.remove('show');
+  }
+
+  // Confete
+  function launchConfetti() {
+    const colors = ['#60a5fa', '#a78bfa', '#f472b6', '#fbbf24', '#34d399', '#f87171', '#22d3ee'];
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = '-10px';
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      confetti.style.width = (Math.random() * 8 + 6) + 'px';
+      confetti.style.height = (Math.random() * 8 + 6) + 'px';
+      document.body.appendChild(confetti);
+
+      const duration = Math.random() * 2000 + 2500;
+      const drift = (Math.random() - 0.5) * 400;
+
+      confetti.animate([
+        { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+        { transform: `translate(${drift}px, 100vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+      ], {
+        duration: duration,
+        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      });
+
+      setTimeout(() => confetti.remove(), duration);
+    }
+  }
+
+  document.getElementById('modal').addEventListener('click', (e) => {
+    if (e.target.id === 'modal') hideSurprise();
+  });
+</script>
+
+</body>
+</html>
